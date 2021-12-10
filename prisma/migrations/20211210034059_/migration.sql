@@ -13,7 +13,7 @@ CREATE TABLE "Usuario" (
 );
 
 -- CreateTable
-CREATE TABLE "Filmes" (
+CREATE TABLE "Filme" (
     "id" TEXT NOT NULL,
     "titulo" TEXT NOT NULL,
     "ano" INTEGER NOT NULL,
@@ -24,11 +24,11 @@ CREATE TABLE "Filmes" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "Filmes_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Filme_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Usuario_email_key" ON "Usuario"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Filmes_titulo_key" ON "Filmes"("titulo");
+CREATE UNIQUE INDEX "Filme_titulo_key" ON "Filme"("titulo");

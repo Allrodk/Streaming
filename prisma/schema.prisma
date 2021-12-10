@@ -21,7 +21,7 @@ model Usuario {
   updatedAt  DateTime @updatedAt
 }
 
-model Filmes {
+model Filme {
   id            String   @id @default(uuid())
   titulo        String   @unique
   ano           Int

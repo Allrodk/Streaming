@@ -48,7 +48,7 @@ export class UsuarioService {
     return usuario;
   }
 
-  //Falata fazer validações em update
+  //Falta fazer validações em update
   async update(id: string, dadosUsuario: UpdateUsuarioDto): Promise<Usuario> {
     const usuarioExiste = await this.db.usuario.findFirst({
       where: { id },
