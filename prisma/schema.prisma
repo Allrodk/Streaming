@@ -19,16 +19,18 @@ model Usuario {
   senha      String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+  filmes     Filme[]
 }
 
 model Filme {
-  id            String   @id @default(uuid())
-  titulo        String   @unique
+  id            String    @id @default(uuid())
+  titulo        String    @unique
   ano           Int
   duracao       Int
   classificacao String
   genero        String
   linkImagem    String
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  usuarios      Usuario[]
 }

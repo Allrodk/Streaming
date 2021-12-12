@@ -7,10 +7,8 @@ import {
 import { PrismaService } from '../prisma.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
-import { Usuario } from '@prisma/client';
+import { Usuario, Filme } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
-import { isUndefined } from 'util';
-
 @Injectable()
 export class UsuarioService {
   constructor(private db: PrismaService) {}
@@ -114,5 +112,36 @@ export class UsuarioService {
       throw new NotFoundException('Usuário não encontrado.');
     }
     return { message: 'Usuário encontrado e deletado com sucesso' };
+  }
+
+  async addList(usuario: Usuario, filmeId: string) {
+    const filme = await this.db.filme.findUnique({
+      where: { id: filmeId },
+    });
+    if (!filme) {
+      throw new NotFoundException('Filme não encontrado.');
+    }
+
+    const usuarioConn = await this.db.usuario.findUnique({
+      where: { id: usuario.id },
+    });
+    console.log(usuarioConn);
+
+    const usuarioFilmes = await this.db.usuario.update({
+      where: { id: usuario.id },
+      data: {
+        filmes: {
+          connect: {
+            id: filme.id,
+          },
+        },
+      },
+      include: {
+        filmes: true,
+      },
+    });
+
+    delete usuarioFilmes.senha;
+    return usuarioFilmes;
   }
 }
